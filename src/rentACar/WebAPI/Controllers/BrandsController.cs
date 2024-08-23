@@ -1,5 +1,4 @@
 using Application.Features.Brands.Commands.Create;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -29,7 +28,7 @@ namespace WebAPI.Controllers
             
          var response = await Mediator.Send(command);
 
-         return Ok("Helo!!!");
+         return Ok(response);
         }
         
         
