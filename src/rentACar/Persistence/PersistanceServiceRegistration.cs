@@ -12,7 +12,7 @@ public static class PersistenceServiceRegistration
     public static IServiceCollection AddPersistenceService(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseInMemoryDatabase("nArchitecture"));
+        services.AddDbContext<BaseDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("RentACar")));
         services.AddScoped<IBrandRepository, BrandRepository>();
         return services;
     }
