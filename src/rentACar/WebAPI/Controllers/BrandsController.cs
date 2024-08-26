@@ -1,4 +1,8 @@
 using Application.Features.Brands.Commands.Create;
+using Application.Features.Brands.Queries.GetById;
+using Application.Features.Brands.Queries.GetList;
+using Core.Application.Requests;
+using Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -7,13 +11,23 @@ namespace WebAPI.Controllers
     [ApiController]
     public class BrandsController : BaseController
     {
-        // // GET: api/<BrandsController>
-        // [HttpGet]
-        // public IEnumerable<string> Get()
-        // {
-        //     return new string[] { "value1", "value2" };
-        // }
-        //
+        // GET: api/<BrandsController>
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        {
+            GetListBrandQuery getListBrandQuery = new() { PageRequest = pageRequest };
+            GetListResponse<GetListBrandDto> response = await Mediator.Send(getListBrandQuery);
+            return Ok(response);
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            GetByIdBrandQuery getByIdBrandQuery = new() { Id = id};
+            GetByIdBrandResponse response = await Mediator.Send(getByIdBrandQuery);
+            return Ok(response);
+        }
+        
         // // GET api/<BrandsController>/5
         // [HttpGet("{id}")]
         // public string Get(int id)
