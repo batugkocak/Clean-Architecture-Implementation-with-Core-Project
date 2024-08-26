@@ -8,14 +8,18 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
     public void Configure(EntityTypeBuilder<Brand> builder)
     {
-        builder.ToTable("Brands").HasKey(b=> b.Id);
+        builder.ToTable("Brands").HasKey(b=>b.Id);
 
-        builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
+        builder.Property(b=>b.Id).HasColumnName("Id").IsRequired();
         builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
-        builder.Property(b => b.CreatedAt).HasColumnName("CreatedAt").IsRequired();
-        builder.Property(b => b.UpdatedAt).HasColumnName("UpdatedAt");
-        builder.Property(b => b.DeletedAt).HasColumnName("DeletedAt");
+        builder.Property(b => b.CreatedAt).HasColumnName("CreatedDate").IsRequired();
+        builder.Property(b => b.CreatedAt).HasColumnName("UpdatedDate");
+        builder.Property(b => b.DeletedAt).HasColumnName("DeletedDate");
 
-        builder.HasQueryFilter(b => !b.DeletedAt.HasValue);
+        builder.HasIndex(indexExpression:b=>b.Name, name:"UK_Brands_Name").IsUnique();
+
+        builder.HasMany(b=>b.Models);
+
+        builder.HasQueryFilter(b=>!b.DeletedAt.HasValue);
     }
 }

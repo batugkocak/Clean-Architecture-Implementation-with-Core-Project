@@ -10,6 +10,10 @@ public class BaseDbContext: DbContext
     
     public IConfiguration Configuration { get; }
     public DbSet<Brand> Brands { get; set; }
+    public DbSet<Car> Cars { get; set; }
+    public DbSet<Fuel> Fuels { get; set; }
+    public DbSet<Transmission> Transmissions { get; set; }
+    public DbSet<Model> Models { get; set; }
     
     protected BaseDbContext(IConfiguration configuration, DbSet<Brand> brands)
     {
