@@ -1,6 +1,7 @@
 using System.Linq.Dynamic.Core;
 using System.Text;
 
+
 namespace Core.Persistence.Dynamic;
 
 public static class IQueryableDynamicFilterExtensions
@@ -50,13 +51,13 @@ public static class IQueryableDynamicFilterExtensions
         {
             if (string.IsNullOrEmpty(item.Field))
                 throw new ArgumentException("Invalid Field");
-            if (string.IsNullOrEmpty(item.Direction) || !_orders.Contains(item.Direction))
+            if (string.IsNullOrEmpty(item.Dir) || !_orders.Contains(item.Dir))
                 throw new ArgumentException("Invalid Order Type");
         }
 
         if (sort.Any())
         {
-            string ordering = string.Join(separator: ",", values: sort.Select(s => $"{s.Field} {s.Direction}"));
+            string ordering = string.Join(separator: ",", values: sort.Select(s => $"{s.Field} {s.Dir}"));
             return queryable.OrderBy(ordering);
         }
 
@@ -107,8 +108,7 @@ public static class IQueryableDynamicFilterExtensions
         {
             if (!_logics.Contains(filter.Logic))
                 throw new ArgumentException("Invalid Logic");
-            return
-                $"{where} {filter.Logic} ({string.Join(separator: $" {filter.Logic} ", value: filter.Filters.Select(f => Transform(f, filters)).ToArray())})";
+            return $"{where} {filter.Logic} ({string.Join(separator: $" {filter.Logic} ", value: filter.Filters.Select(f => Transform(f, filters)).ToArray())})";
         }
 
         return where.ToString();

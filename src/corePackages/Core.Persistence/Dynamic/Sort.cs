@@ -3,20 +3,17 @@ namespace Core.Persistence.Dynamic;
 public class Sort
 {
     public string Field { get; set; }
+    public string Dir { get; set; }
 
-    public string Direction { get; set; }
-    
     public Sort()
     {
         Field = string.Empty;
-
-        Direction = string.Empty;
+        Dir = string.Empty;
     }
-    
-    public Sort(string field, string direction)
+
+    public Sort(string field, string dir)
     {
         Field = field;
-
-        Direction = direction;
+        Dir = dir;
     }
 }
