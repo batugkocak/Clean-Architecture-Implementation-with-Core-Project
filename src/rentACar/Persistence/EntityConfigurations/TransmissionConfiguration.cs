@@ -12,6 +12,7 @@ public class TransmissionConfiguration : IEntityTypeConfiguration<Transmission>
 
         builder.Property(t => t.Id).HasColumnName("Id").IsRequired();
         builder.Property(t => t.Name).HasColumnName("Name").IsRequired();
+        
         builder.Property(t => t.CreatedAt).HasColumnName("CreatedDate").IsRequired();
         builder.Property(t => t.UpdatedAt).HasColumnName("UpdatedDate");
         builder.Property(t => t.DeletedAt).HasColumnName("DeletedDate");

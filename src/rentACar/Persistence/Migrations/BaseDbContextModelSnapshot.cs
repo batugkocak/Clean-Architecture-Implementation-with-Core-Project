@@ -31,7 +31,7 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("UpdatedDate");
+                        .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone")
@@ -43,7 +43,8 @@ namespace Persistence.Migrations
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
 

@@ -12,7 +12,7 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240826083437_init")]
+    [Migration("20240827105238_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -34,7 +34,7 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("UpdatedDate");
+                        .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("timestamp with time zone")
@@ -46,7 +46,8 @@ namespace Persistence.Migrations
                         .HasColumnName("Name");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
 
