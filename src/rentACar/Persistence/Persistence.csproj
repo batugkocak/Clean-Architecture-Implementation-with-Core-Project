@@ -25,4 +25,13 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Migrations\BaseDbContextModelSnapshot.cs" />
+      <Compile Remove="Migrations\20240827105238_init.Designer.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>
