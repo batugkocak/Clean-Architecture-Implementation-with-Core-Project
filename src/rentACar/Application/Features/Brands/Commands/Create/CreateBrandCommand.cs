@@ -1,12 +1,13 @@
 using Application.Features.Brands.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Transaction;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Brands.Commands.Create;
 
-public class CreateBrandCommand : IRequest<CreateBrandResponse>
+public class CreateBrandCommand : IRequest<CreateBrandResponse>, ITransactionalRequest
 {
     public string Name { get; set; }
 
