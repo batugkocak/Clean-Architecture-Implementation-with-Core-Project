@@ -2,14 +2,19 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Requests;
 using Core.Application.Responses;
-using Domain.Entities;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 
 namespace Application.Features.Brands.Queries.GetList;
 
-public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandDto>>
+public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandDto>>, ICacheableRequest
 {
     public PageRequest PageRequest { get; set; }
+    public string CacheKey => $"GetListBrandQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
+
+    public bool BypassCache { get; }
+
+    public TimeSpan? SlidingExpiration { get; }
     
     public class GetListBrandHandler : IRequestHandler<GetListBrandQuery, GetListResponse<GetListBrandDto>>
     {
@@ -35,4 +40,6 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandDto>>
            return response;
         }
     }
+
+
 }
