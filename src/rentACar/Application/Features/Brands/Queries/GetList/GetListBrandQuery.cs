@@ -12,6 +12,8 @@ public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandDto>>, ICa
     public PageRequest PageRequest { get; set; }
     public string CacheKey => $"GetListBrandQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
 
+    public string? CacheGroupKey => $"GetBrands";
+
     public bool BypassCache { get; }
 
     public TimeSpan? SlidingExpiration { get; }

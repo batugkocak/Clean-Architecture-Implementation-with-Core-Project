@@ -1,11 +1,15 @@
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Caching;
 using MediatR;
 
 namespace Application.Features.Brands.Commands.Delete;
 
-public class DeleteBrandCommand : IRequest<DeletedBrandResponse>
+public class DeleteBrandCommand : IRequest<DeletedBrandResponse>, ICacheRemoverRequest
 {
+    public string? CacheKey { get; }
+    public bool BypassCache { get; }
+    public string? CacheGroupKey => "GetBrands";
     public Guid Id { get; set; }
     public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, DeletedBrandResponse>
     {
@@ -29,4 +33,6 @@ public class DeleteBrandCommand : IRequest<DeletedBrandResponse>
             return response;
         }
     }
+
+
 }
