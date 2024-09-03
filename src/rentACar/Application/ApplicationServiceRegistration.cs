@@ -32,9 +32,10 @@ public static class ApplicationServiceRegistration
                 configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
                 configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
                 configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+
             });
 
-        services.AddSingleton<LoggerServiceBase, FileLogger>();
+        services.AddSingleton<LoggerServiceBase, PostgreSQLLogger>();
 
         return services;  
     }   
@@ -50,7 +51,6 @@ public static class ApplicationServiceRegistration
         foreach (var item in types)
             if (addWithLifeCycle == null)
                 services.AddScoped(item);
-
             else
                 addWithLifeCycle(services, type);
         return services;

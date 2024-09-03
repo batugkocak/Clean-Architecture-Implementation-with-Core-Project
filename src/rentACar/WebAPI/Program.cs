@@ -12,11 +12,11 @@ builder.Services.AddPersistenceService(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
 
-// builder.Services.AddDistributedMemoryCache();
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = "localhost:6379";
-});
+builder.Services.AddDistributedMemoryCache();
+// builder.Services.AddStackExchangeRedisCache(options =>
+// {
+//     options.Configuration = "localhost:6379";
+// });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-if(app.Environment.IsProduction()) 
+//if(app.Environment.IsProduction()) 
     app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
