@@ -12,15 +12,16 @@ public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly HttpExceptionHandler _httpExceptionHandler;
-    private readonly HttpContextAccessor _httpContextAccessor;
-    private readonly LoggerServiceBase _loggerServiceBase;
+    private readonly IHttpContextAccessor _contextAccessor;
+    private readonly LoggerServiceBase _loggerService;
 
-    public ExceptionMiddleware(RequestDelegate next, HttpContextAccessor httpContextAccessor, LoggerServiceBase loggerServiceBase)
+    public ExceptionMiddleware(RequestDelegate next, 
+        IHttpContextAccessor contextAccessor, LoggerServiceBase loggerService)
     {
         _next = next;
         _httpExceptionHandler = new HttpExceptionHandler();
-        _httpContextAccessor = httpContextAccessor;
-        _loggerServiceBase = loggerServiceBase;
+        _contextAccessor = contextAccessor;
+        _loggerService = loggerService;
     }
 
     public async Task Invoke(HttpContext context)
@@ -51,10 +52,10 @@ public class ExceptionMiddleware
             ExceptionMessage = exception.Message,
             MethodName = _next.Method.Name,
             Parameters = logParameters,
-            User = _httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?",
+            User = _contextAccessor.HttpContext?.User.Identity?.Name ?? "?",
         };
         
-        _loggerServiceBase.Error(JsonSerializer.Serialize(logDetail));
+        _loggerService.Error(JsonSerializer.Serialize(logDetail));
 
         return Task.CompletedTask;
     }
