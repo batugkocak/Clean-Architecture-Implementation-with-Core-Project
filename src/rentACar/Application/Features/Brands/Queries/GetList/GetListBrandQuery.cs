@@ -3,11 +3,12 @@ using AutoMapper;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
 using MediatR;
 
 namespace Application.Features.Brands.Queries.GetList;
 
-public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandDto>>, ICacheableRequest
+public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandDto>>, ICacheableRequest, ILoggableRequest
 {
     public PageRequest PageRequest { get; set; }
     public string CacheKey => $"GetListBrandQuery({PageRequest.PageIndex},{PageRequest.PageSize})";
