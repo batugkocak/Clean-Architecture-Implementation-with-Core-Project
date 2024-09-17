@@ -7,9 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Models\Commands\" />
+      <Folder Include="Features\Models\Commands\Create\" />
+      <Folder Include="Features\Models\Commands\Delete\" />
+      <Folder Include="Features\Models\Commands\Update\" />
       <Folder Include="Features\Models\Constants\" />
       <Folder Include="Features\Models\Rules\" />
+      <Folder Include="Features\Users\Queries\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,6 +32,9 @@
       </Reference>
       <Reference Include="Core.Persistence">
         <HintPath>..\..\corePackages\Core.Persistence\bin\Debug\net8.0\Core.Persistence.dll</HintPath>
+      </Reference>
+      <Reference Include="Core.Security">
+        <HintPath>..\..\corePackages\Core.Security\bin\Debug\net8.0\Core.Security.dll</HintPath>
       </Reference>
     </ItemGroup>
 
